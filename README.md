@@ -193,4 +193,4 @@ Distributed under the **GPLv2 or later** License. See [LICENSE](LICENSE) for mor
 
 ## 👨‍💻 Author
 
-Developed by **[Malik Adnan Haider - WebWhizy](https://webwhizy.com)**.
+Developed with ❤️ by **[Adnan Haider](https://codebyadnan.tech/)**.

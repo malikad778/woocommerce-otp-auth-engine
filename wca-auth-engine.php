@@ -5,7 +5,7 @@
  * Description:       Complete authentication engine for WooCommerce Multisite. Replaces seven conflicting plugins with a unified, decoupled auth pipeline featuring dual-factor verification (native wp_mail email + TextMagic SMS) and pre-database registration gating.
  * Version:           1.0.0
  * Author:            Malik Adnan Haider - WebWhizy
- * Author URI:        https://webwhizy.com
+ * Author URI:        https://codebyadnan.tech/
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       wca-auth-engine
