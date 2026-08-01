@@ -1,10 +1,6 @@
 # WCA Auth Engine
 
-[![Tests](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml)
-[![License: GPL v2+](https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![WordPress: >= 6.0](https://img.shields.io/badge/WordPress-%3E%3D%206.0-blue)](https://wordpress.org)
-[![WooCommerce: >= 7.0](https://img.shields.io/badge/WooCommerce-%3E%3D%207.0-purple)](https://woocommerce.com)
-[![PHP: >= 8.1](https://img.shields.io/badge/PHP-%3E%3D%208.1-777BB4.svg)](https://php.net)
+[![Tests](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml) [![License: GPL v2+](https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html) [![WordPress: >= 6.0](https://img.shields.io/badge/WordPress-%3E%3D%206.0-blue)](https://wordpress.org) [![WooCommerce: >= 7.0](https://img.shields.io/badge/WooCommerce-%3E%3D%207.0-purple)](https://woocommerce.com) [![PHP: >= 8.1](https://img.shields.io/badge/PHP-%3E%3D%208.1-777BB4.svg)](https://php.net)
 
 **WCA Auth Engine** is a high-performance, decoupled authentication and registration system built specifically for **WooCommerce** and **WordPress** (Single-Site & Multisite).
 
