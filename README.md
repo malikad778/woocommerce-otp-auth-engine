@@ -1,5 +1,6 @@
 # WCA Auth Engine
 
+[![Tests](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/malikad778/woocommerce-otp-auth-engine/actions/workflows/tests.yml)
 [![License: GPL v2+](https://img.shields.io/badge/License-GPL%20v2%2B-blue.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 [![WordPress: >= 6.0](https://img.shields.io/badge/WordPress-%3E%3D%206.0-blue)](https://wordpress.org)
 [![WooCommerce: >= 7.0](https://img.shields.io/badge/WooCommerce-%3E%3D%207.0-purple)](https://woocommerce.com)
