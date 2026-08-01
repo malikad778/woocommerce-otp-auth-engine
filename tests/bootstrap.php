@@ -24,6 +24,11 @@ if (!function_exists('add_action')) {
 if (!function_exists('add_filter')) {
     function add_filter($hook, $callback, $priority = 10, $accepted_args = 1) {}
 }
+if (!function_exists('apply_filters')) {
+    function apply_filters($tag, $value, ...$args) {
+        return $value;
+    }
+}
 if (!function_exists('defined')) {
     function defined($name) { return true; }
 }
@@ -55,6 +60,24 @@ if (!function_exists('wp_check_password')) {
 if (!function_exists('get_site_option')) {
     function get_site_option($key, $default = false) {
         return $default;
+    }
+}
+if (!class_exists('WP_User')) {
+    class WP_User {
+        public int $ID = 1;
+        public string $user_email = 'test@example.com';
+        public string $user_login = 'testuser';
+    }
+}
+if (!function_exists('get_user_by')) {
+    function get_user_by($field, $value) {
+        if ($field === 'email' && $value === 'test@example.com') {
+            return new WP_User();
+        }
+        if ($field === 'login' && $value === 'testuser') {
+            return new WP_User();
+        }
+        return false;
     }
 }
 

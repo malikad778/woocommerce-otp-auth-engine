@@ -4,21 +4,23 @@ use PHPUnit\Framework\TestCase;
 
 class TestIdentifierResolver extends TestCase
 {
-    public function test_classify_email()
+    public function test_resolve_by_email()
     {
-        $type = WCA_Identifier_Resolver::classify('user@example.com');
-        $this->assertEquals('email', $type);
+        $user = WCA_Identifier_Resolver::resolve('test@example.com');
+        $this->assertInstanceOf('WP_User', $user);
+        $this->assertEquals('test@example.com', $user->user_email);
     }
 
-    public function test_classify_phone()
+    public function test_resolve_by_username()
     {
-        $type = WCA_Identifier_Resolver::classify('+15550192834');
-        $this->assertEquals('phone', $type);
+        $user = WCA_Identifier_Resolver::resolve('testuser');
+        $this->assertInstanceOf('WP_User', $user);
+        $this->assertEquals('testuser', $user->user_login);
     }
 
-    public function test_classify_username()
+    public function test_resolve_non_existent()
     {
-        $type = WCA_Identifier_Resolver::classify('john_doe_99');
-        $this->assertEquals('username', $type);
+        $user = WCA_Identifier_Resolver::resolve('non_existent_user_123');
+        $this->assertFalse($user);
     }
 }
