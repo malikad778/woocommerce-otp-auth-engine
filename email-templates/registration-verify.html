@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+  WCA Auth Engine - Registration Verification Email
+  Default body for the "Registration (Verify Link)" template - editable under
+  Network Admin > WCA Auth > Settings > Email Templates.
+  Required params: FIRST_NAME, VERIFY_URL, EXPIRY_MINUTES
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email Address</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; }
+        .wrapper { max-width: 560px; margin: 40px auto; }
+        .card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .header { background: #2563eb; padding: 36px 40px 28px; text-align: center; }
+        .header h1 { color: #ffffff; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+        .header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 6px; }
+        .body { padding: 40px; }
+        .greeting { font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+        .text { font-size: 15px; color: #475569; line-height: 1.65; margin-bottom: 24px; }
+        .btn-wrapper { text-align: center; margin: 32px 0; }
+        .btn { display: inline-block; background: #2563eb; color: #ffffff !important; text-decoration: none; padding: 14px 40px; border-radius: 8px; font-size: 16px; font-weight: 700; letter-spacing: 0.01em; }
+        .expiry-note { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #1d4ed8; margin-bottom: 24px; }
+        .fallback { font-size: 12px; color: #94a3b8; word-break: break-all; line-height: 1.5; }
+        .fallback a { color: #2563eb; }
+        .divider { border: none; border-top: 1px solid #e2e8f0; margin: 28px 0; }
+        .footer { padding: 20px 40px; background: #f8fafc; text-align: center; font-size: 12px; color: #94a3b8; line-height: 1.6; }
+        .security-tip { font-size: 12px; color: #64748b; margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <h1>Verify Your Email</h1>
+                <p>One click and you're in.</p>
+            </div>
+
+            <!-- Body -->
+            <div class="body">
+                <p class="greeting">Hi {{ params.FIRST_NAME }},</p>
+                <p class="text">
+                    Thanks for signing up. Click the button below to verify your email address
+                    and complete your account registration.
+                </p>
+
+                <div class="btn-wrapper">
+                    <a href="{{ params.VERIFY_URL }}" class="btn">Verify My Email Address</a>
+                </div>
+
+                <div class="expiry-note">
+                    ⏱ This link expires in <strong>{{ params.EXPIRY_MINUTES }} minutes</strong>.
+                    If you need a new link, return to the registration page and click "Resend email".
+                </div>
+
+                <p class="text" style="font-size:13px;color:#64748b;">
+                    If the button above doesn't work, copy and paste this URL into your browser:
+                </p>
+                <p class="fallback">
+                    <a href="{{ params.VERIFY_URL }}">{{ params.VERIFY_URL }}</a>
+                </p>
+
+                <hr class="divider">
+
+                <div class="security-tip">
+                    🔒 <strong>Security tip:</strong> We will never ask for your password via email.
+                    If you did not create an account, you can safely ignore this email.
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>&copy; {{ "now" | date: "%Y" }} WebWhizy. All rights reserved.</p>
+                <p style="margin-top:6px;">This is a transactional email related to your account registration.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

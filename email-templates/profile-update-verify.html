@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+  WCA Auth Engine - Profile Update Verification Email
+  Default body for the "Profile Update OTP" template - editable under
+  Network Admin > WCA Auth > Settings > Email Templates.
+  Required params: FIRST_NAME, OTP_CODE, EXPIRY_MINUTES
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Email Change</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b; }
+        .wrapper { max-width: 560px; margin: 40px auto; }
+        .card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .header { background: #7c3aed; padding: 36px 40px 28px; text-align: center; }
+        .header h1 { color: #ffffff; font-size: 24px; font-weight: 700; }
+        .header p { color: rgba(255,255,255,0.75); font-size: 14px; margin-top: 6px; }
+        .body { padding: 40px; }
+        .greeting { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        .text { font-size: 15px; color: #475569; line-height: 1.65; margin-bottom: 24px; }
+        .otp-box { background: #f5f3ff; border: 2px solid #ddd6fe; border-radius: 12px; text-align: center; padding: 28px 20px; margin: 28px 0; }
+        .otp-label { font-size: 12px; font-weight: 600; color: #6d28d9; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+        .otp-code { font-size: 48px; font-weight: 800; letter-spacing: 0.2em; color: #4c1d95; font-family: 'Courier New', Courier, monospace; }
+        .otp-expiry { font-size: 13px; color: #64748b; margin-top: 10px; }
+        .warning-box { background: #fef3c7; border: 1px solid #fbbf24; border-radius: 8px; padding: 14px 18px; font-size: 13px; color: #92400e; margin-bottom: 24px; }
+        .security-tip { font-size: 12px; color: #64748b; margin-top: 16px; padding: 12px; background: #f8fafc; border-radius: 6px; }
+        .divider { border: none; border-top: 1px solid #e2e8f0; margin: 28px 0; }
+        .footer { padding: 20px 40px; background: #f8fafc; text-align: center; font-size: 12px; color: #94a3b8; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <h1>Confirm Email Change</h1>
+                <p>Sent to your new email address.</p>
+            </div>
+
+            <!-- Body -->
+            <div class="body">
+                <p class="greeting">Hi {{ params.FIRST_NAME }},</p>
+                <p class="text">
+                    You've requested to update the email address on your account. Enter the code
+                    below in the verification window to confirm this change.
+                </p>
+
+                <div class="warning-box">
+                    ⚠️ <strong>Important:</strong> Your old email address remains active until both
+                    your new email and phone number are successfully verified.
+                </div>
+
+                <!-- OTP display -->
+                <div class="otp-box">
+                    <div class="otp-label">Email Verification Code</div>
+                    <div class="otp-code">{{ params.OTP_CODE }}</div>
+                    <div class="otp-expiry">⏱ Expires in {{ params.EXPIRY_MINUTES }} minutes</div>
+                </div>
+
+                <hr class="divider">
+
+                <div class="security-tip">
+                    🔒 <strong>Did not request this change?</strong> If you did not initiate an email
+                    address change, please sign in immediately and review your account security settings.
+                    Contact support if you need assistance.
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>&copy; {{ "now" | date: "%Y" }} WebWhizy. All rights reserved.</p>
+                <p style="margin-top:6px;">This email was sent because an account update was requested.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

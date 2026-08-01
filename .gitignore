@@ -1,0 +1,21 @@
+# Logs
+*.log
+auth_engine.log
+
+# Archives & Builds
+*.zip
+*.tar.gz
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE & Editor Files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

@@ -1,0 +1,926 @@
+/**
+ * wca-auth.css
+ * WCA Auth Engine - Frontend + Admin styles.
+ * Integrates with the existing WooCommerce storefront theme (Twenty Twenty-Four / Storefront).
+ * No !important wars - specificity scoped under .wca-* prefix.
+ */
+
+/* ═══════════════════════════════════════════════════════════════
+   CSS Custom Properties
+════════════════════════════════════════════════════════════════ */
+:root {
+  --wca-primary: #2563eb;
+  --wca-primary-hover: #1d4ed8;
+  --wca-danger: #dc2626;
+  --wca-success: #16a34a;
+  --wca-warning: #d97706;
+  --wca-bg: #ffffff;
+  --wca-bg-overlay: rgba(0, 0, 0, 0.55);
+  --wca-border: #e2e8f0;
+  --wca-text: #1e293b;
+  --wca-text-muted: #64748b;
+  --wca-radius: 12px;
+  --wca-radius-sm: 6px;
+  --wca-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  --wca-transition: 0.2s ease;
+  --wca-font: inherit;
+  --wca-input-height: 48px;
+  --wca-btn-height: 48px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Modal Backdrop
+════════════════════════════════════════════════════════════════ */
+.wca-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wca-bg-overlay);
+  padding: 16px;
+  animation: wca-fade-in 0.15s ease;
+}
+
+.wca-modal-backdrop[hidden] {
+  display: none !important;
+}
+
+@keyframes wca-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Modal Panel
+════════════════════════════════════════════════════════════════ */
+.wca-modal {
+  background: var(--wca-bg);
+  border-radius: var(--wca-radius);
+  box-shadow: var(--wca-shadow);
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 36px;
+  position: relative;
+  animation: wca-slide-up 0.2s ease;
+  font-family: var(--wca-font);
+  color: var(--wca-text);
+}
+
+@keyframes wca-slide-up {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.wca-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--wca-text-muted);
+  font-size: 20px;
+  transition: background var(--wca-transition), color var(--wca-transition);
+}
+
+.wca-modal__close:hover {
+  background: transparent;
+  color: var(--wca-text);
+}
+
+.wca-modal__logo {
+  display: block;
+  margin: 0 auto 24px;
+  max-height: 40px;
+  width: auto;
+}
+
+.wca-modal__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  text-align: center;
+  color: var(--wca-text);
+  line-height: 1.3;
+}
+
+.wca-modal__subtitle {
+  font-size: 0.9rem;
+  color: var(--wca-text-muted);
+  text-align: center;
+  margin: 0 0 28px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Form Fields
+════════════════════════════════════════════════════════════════ */
+.wca-field {
+  margin-bottom: 16px;
+}
+
+.wca-field label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--wca-text);
+  margin-bottom: 6px;
+}
+
+.wca-field input[type="text"],
+.wca-field input[type="email"],
+.wca-field input[type="password"],
+.wca-field input[type="tel"],
+.wca-field input[type="number"] {
+  display: block;
+  width: 100%;
+  height: var(--wca-input-height);
+  padding: 0 14px;
+  border: 1.5px solid var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  font-size: 0.95rem;
+  color: var(--wca-text);
+  background: #fff;
+  transition: border-color var(--wca-transition), box-shadow var(--wca-transition);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.wca-field input:focus {
+  border-color: var(--wca-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wca-field input.is-invalid {
+  border-color: var(--wca-danger);
+}
+
+.wca-field-hint {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--wca-text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+/* Password reveal wrapper */
+.wca-field--password {
+  position: relative;
+}
+
+.wca-field--password input {
+  padding-right: 48px;
+}
+
+.wca-btn-reveal {
+  position: absolute;
+  right: 12px;
+  top: 70%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--wca-text-muted);
+  padding: 4px;
+  line-height: 1;
+}
+
+.wca-btn-reveal svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   OTP Input Grid
+════════════════════════════════════════════════════════════════ */
+.wca-otp-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.wca-otp-grid input {
+  width: 100%;
+  aspect-ratio: 1;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  border: 2px solid var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  background: #fff;
+  outline: none;
+  padding: 5px;
+  caret-color: var(--wca-primary);
+  transition: border-color var(--wca-transition), box-shadow var(--wca-transition);
+}
+
+.wca-otp-grid input:focus {
+  border-color: var(--wca-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wca-otp-grid input:not(:placeholder-shown) {
+  border-color: var(--wca-success);
+  background: #f0fdf4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Buttons
+════════════════════════════════════════════════════════════════ */
+.wca-btn {
+  display: block;
+  width: 100%;
+  height: var(--wca-btn-height);
+  padding: 0 20px;
+  border: none;
+  border-radius: var(--wca-radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--wca-transition), opacity var(--wca-transition), transform var(--wca-transition);
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.wca-btn-primary {
+  background: var(--wca-primary);
+  color: #fff;
+}
+
+.wca-btn-primary:hover:not(:disabled) {
+  background: var(--wca-primary-hover);
+  transform: translateY(-1px);
+}
+
+.wca-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wca-btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--wca-border);
+  color: var(--wca-text);
+}
+
+.wca-btn-ghost:hover {
+  background: var(--wca-border);
+}
+
+.wca-btn-link {
+  background: none;
+  border: none;
+  color: var(--wca-primary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.wca-btn-link:disabled {
+  color: var(--wca-text-muted);
+  cursor: default;
+  text-decoration: none;
+}
+
+/* Spinner inside button */
+.wca-btn .wca-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: wca-spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes wca-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Alert / Error / Success Messages
+════════════════════════════════════════════════════════════════ */
+.wca-alert {
+  border-radius: var(--wca-radius-sm);
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.wca-alert-error {
+  background: #fef2f2;
+  color: var(--wca-danger);
+  border: 1px solid #fecaca;
+}
+
+.wca-alert-success {
+  background: #f0fdf4;
+  color: var(--wca-success);
+  border: 1px solid #bbf7d0;
+}
+
+.wca-alert-info {
+  background: #eff6ff;
+  color: var(--wca-primary);
+  border: 1px solid #bfdbfe;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Divider
+════════════════════════════════════════════════════════════════ */
+.wca-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  font-size: 0.8rem;
+  color: var(--wca-text-muted);
+}
+
+.wca-divider::before,
+.wca-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--wca-border);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   One-click OTP Action Buttons
+════════════════════════════════════════════════════════════════ */
+.wca-otp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wca-otp-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  background: #f8fafc;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--wca-transition), background var(--wca-transition), box-shadow var(--wca-transition);
+  font-family: var(--wca-font);
+}
+
+.wca-otp-action-btn:hover:not(:disabled) {
+  border-color: var(--wca-primary);
+  background: #eff6ff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.wca-otp-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wca-otp-action-btn__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.wca-otp-action-btn__label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wca-otp-action-btn__label strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--wca-text);
+}
+
+.wca-otp-action-btn__label small {
+  font-size: 0.75rem;
+  color: var(--wca-text-muted);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   OTP Status Indicator
+════════════════════════════════════════════════════════════════ */
+.wca-otp-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--wca-text-muted);
+  margin-top: 8px;
+}
+
+.wca-otp-status--expiring {
+  color: var(--wca-danger);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Progress Steps (Registration)
+════════════════════════════════════════════════════════════════ */
+.wca-steps {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.wca-step {
+  width: 28px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--wca-border);
+  transition: background 0.3s ease;
+}
+
+.wca-step.active {
+  background: var(--wca-primary);
+}
+
+.wca-step.done {
+  background: var(--wca-success);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Success Checkmark Animation
+════════════════════════════════════════════════════════════════ */
+.wca-success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f0fdf4;
+  margin: 0 auto 20px;
+  animation: wca-pop 0.3s ease;
+}
+
+@keyframes wca-pop {
+  0% {
+    transform: scale(0.5);
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.wca-success-icon svg {
+  width: 32px;
+  height: 32px;
+  color: var(--wca-success);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Checkout - Locked Fields Notice
+════════════════════════════════════════════════════════════════ */
+.wca-locked-field {
+  background: #f8fafc !important;
+  color: var(--wca-text-muted) !important;
+  cursor: not-allowed;
+}
+
+.wca-locked-fields-notice {
+  font-size: 0.85rem;
+  color: var(--wca-text-muted);
+  margin-top: 8px;
+}
+
+.wca-locked-fields-notice a {
+  color: var(--wca-primary);
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Admin - Event Badge colours (Log Viewer)
+════════════════════════════════════════════════════════════════ */
+.wca-event-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.wca-event-user_created {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.wca-event-auth_success {
+  background: #dbeafe;
+  color: #1e3a5f;
+}
+
+.wca-event-auth_failed {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.wca-event-otp_rate_limited {
+  background: #fef3c7;
+  color: #78350f;
+}
+
+.wca-event-otp_max_attempts {
+  background: #fde8d8;
+  color: #7c2d12;
+}
+
+.wca-event-sms_sent {
+  background: #ede9fe;
+  color: #4c1d95;
+}
+
+.wca-event-otp_sent {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.wca-event-email_send_failed,
+.wca-event-sms_send_failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.wca-event-recaptcha_failed {
+  background: #fef9c3;
+  color: #713f12;
+}
+
+.wca-event-checkout_access_blocked {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+
+.wca-event-bypass_account_deleted {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Responsive
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .wca-modal {
+    padding: 28px 20px;
+    border-radius: var(--wca-radius-sm);
+  }
+
+  .wca-otp-grid {
+    gap: 6px;
+  }
+
+  .wca-otp-grid input {
+    font-size: 1.1rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Accessibility: Focus-visible
+════════════════════════════════════════════════════════════════ */
+.wca-btn:focus-visible,
+.wca-field input:focus-visible {
+  outline: 3px solid var(--wca-primary);
+  outline-offset: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dark mode (respects prefers-color-scheme)
+════════════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wca-bg: #1e293b;
+    --wca-border: #334155;
+    --wca-text: #f1f5f9;
+    --wca-text-muted: #94a3b8;
+  }
+
+  .wca-field input[type="text"],
+  .wca-field input[type="email"],
+  .wca-field input[type="password"],
+  .wca-field input[type="tel"],
+  .wca-otp-grid input {
+    background: #0f172a;
+    color: #f1f5f9;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WooCommerce Password Toggle Override (Account Edit)
+════════════════════════════════════════════════════════════════ */
+.woocommerce-account .password-input {
+  position: relative;
+  display: block;
+}
+
+.woocommerce-account .password-input .show-password-input {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: transparent !important;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.woocommerce-account .password-input .show-password-input::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' /%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' /%3E%3C/svg%3E");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.woocommerce-account .password-input .show-password-input:hover::after {
+  opacity: 1;
+}
+
+.woocommerce-account .password-input .show-password-input.display-password::after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21' /%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Login Modal – Identifier Tabs
+════════════════════════════════════════════════════════════════ */
+.wca-login-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+  background: var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  padding: 4px;
+}
+
+.wca-login-tabs button {
+  flex: 1;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  border-radius: calc(var(--wca-radius-sm) - 2px);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--wca-text-muted);
+  cursor: pointer;
+  transition: background var(--wca-transition), color var(--wca-transition), box-shadow var(--wca-transition);
+  line-height: 1.2;
+}
+
+.wca-login-tabs button.active {
+  background: #fff;
+  color: var(--wca-text);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+.wca-login-tabs button:hover:not(.active) {
+  color: var(--wca-text);
+}
+
+.wca-tab-panel {
+  animation: wca-fade-in 0.12s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Phone Row – dial code select + number input side by side
+════════════════════════════════════════════════════════════════ */
+.wca-phone-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.wca-dialcode-select {
+  flex: 0 0 auto;
+  width: 110px;           /* Fixed width - prevents long option text from expanding the select */
+  min-width: 0;
+  height: var(--wca-input-height);
+  padding: 0 28px 0 10px; /* Right padding reserved for the chevron icon */
+  border: 1.5px solid var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  font-size: 0.9rem;
+  color: var(--wca-text);
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--wca-transition), box-shadow var(--wca-transition);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wca-dialcode-select:focus {
+  border-color: var(--wca-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.wca-phone-row input[type="tel"] {
+  flex: 1 1 0;            /* flex: 1 1 0 ensures it grows to fill remaining space */
+  min-width: 0;           /* Prevents flex child from overflowing when content is wide */
+  height: var(--wca-input-height);
+  padding: 0 14px;
+  border: 1.5px solid var(--wca-border);
+  border-radius: var(--wca-radius-sm);
+  font-size: 0.95rem;
+  color: var(--wca-text);
+  background: #fff;
+  outline: none;
+  transition: border-color var(--wca-transition), box-shadow var(--wca-transition);
+  box-sizing: border-box;
+}
+
+.wca-phone-row input[type="tel"]:focus {
+  border-color: var(--wca-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Checkout Locked Field Descriptions
+════════════════════════════════════════════════════════════════ */
+.woocommerce-checkout .wca-locked-field .description {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  height: auto !important;
+  margin-top: 6px;
+  font-size: 0.85em;
+  color: var(--wca-text-muted);
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Account Details – Verified / Unverified Badges & Verify Button
+════════════════════════════════════════════════════════════════ */
+.wca-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.78em;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  vertical-align: middle;
+  margin-left: 6px;
+  line-height: 1.4;
+}
+
+.wca-verified-badge--ok {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.wca-verified-badge--warn {
+  background: #fff7ed;
+  color: #9a3412;
+  border: 1px solid #fed7aa;
+}
+
+.wca-verify-action-btn {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--wca-radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.wca-verify-action-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Network Admin - Login Notify search + editor panel
+════════════════════════════════════════════════════════════════ */
+.wca-notify-search {
+  position: relative;
+  max-width: 420px;
+  margin: 16px 0;
+}
+
+.wca-notify-search {
+  position: relative;
+  display: inline-block;
+  min-width: 340px;
+  max-width: 100%;
+  margin-bottom: 12px;
+}
+
+.wca-notify-search input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wca-notify-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.wca-notify-search-result {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f1;
+}
+
+.wca-notify-search-result:last-child {
+  border-bottom: none;
+}
+
+.wca-notify-search-result:hover {
+  background: #f0f6fc;
+}
+
+.wca-notify-editor {
+  max-width: 640px;
+  padding: 16px 20px;
+  margin-top: 8px;
+}
+
+.wca-notify-editor textarea {
+  font-family: Consolas, Monaco, monospace;
+  font-size: 13px;
+}
+
+#wca-notify-active-table td {
+  vertical-align: top;
+}
